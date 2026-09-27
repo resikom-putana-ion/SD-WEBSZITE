@@ -14,7 +14,7 @@
 
         <article class="overflow-hidden rounded-[32px] border border-white/80 bg-white/70 p-6 shadow-xl backdrop-blur">
             @if ($news->image_path)
-                <img src="{{ asset('storage/'.$news->image_path) }}" alt="{{ $news->title }}" class="mb-6 h-80 w-full rounded-[28px] object-cover shadow-md">
+                <img src="{{ Storage::disk('public')->url($news->image_path) }}" alt="{{ $news->title }}" class="mb-6 h-80 w-full rounded-[28px] object-cover shadow-md">
             @endif
 
             <div class="mb-4 flex items-center gap-3 text-sm text-slate-500">

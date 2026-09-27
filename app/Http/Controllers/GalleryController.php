@@ -30,7 +30,7 @@ class GalleryController extends Controller
     {
         $this->authorizeRole(['admin', 'teacher']);
 
-        return view('gallery.form', ['gallery' => new Gallery(), 'mode' => 'create']);
+        return view('gallery.form', ['gallery' => new Gallery, 'mode' => 'create']);
     }
 
     public function store(Request $request): RedirectResponse
@@ -41,16 +41,13 @@ class GalleryController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'category' => ['nullable', 'string', 'max:100'],
-            'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp'],
+            'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
-        $gallery = Gallery::create([
+        Gallery::create([
             'title' => $validated['title'],
             'description' => $validated['description'] ?? null,
             'category' => $validated['category'] ?? 'umum',
-        ]);
-
-        $gallery->update([
             'image_path' => $request->file('image')->store('gallery', 'public'),
         ]);
 
@@ -72,7 +69,7 @@ class GalleryController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'category' => ['nullable', 'string', 'max:100'],
-            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
         $gallery->update([

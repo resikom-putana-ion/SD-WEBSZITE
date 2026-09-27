@@ -34,7 +34,7 @@ Route::get('/guru', [TeacherController::class, 'publicIndex'])->name('teacher.in
 Route::get('/galeri', [GalleryController::class, 'publicIndex'])->name('gallery.index');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:login')->name('login.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/pendaftaran', [RegistrationController::class, 'create'])->name('registration.create');
@@ -72,6 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/siswa/pembayaran', [FinanceController::class, 'submitPayment'])->name('student.payments.store');
 
     Route::get('/keuangan/pembayaran', [FinanceController::class, 'dashboard'])->name('finance.payments');
+    Route::get('/keuangan/pembayaran/{payment}/bukti', [FinanceController::class, 'proof'])->name('finance.payments.proof');
     Route::post('/keuangan/pembayaran/{payment}/approve', [FinanceController::class, 'review'])->name('finance.payments.approve');
     Route::post('/keuangan/pembayaran/{payment}/reject', [FinanceController::class, 'reject'])->name('finance.payments.reject');
 });

@@ -22,7 +22,7 @@
                 <article class="overflow-hidden rounded-[30px] border border-white/80 bg-white/70 shadow-lg backdrop-blur">
                     <div class="h-52 overflow-hidden bg-slate-200">
                         @if ($item->image_path)
-                            <img src="{{ asset('storage/'.$item->image_path) }}" alt="{{ $item->title }}" class="h-full w-full object-cover">
+                            <img src="{{ Storage::disk('public')->url($item->image_path) }}" alt="{{ $item->title }}" class="h-full w-full object-cover">
                         @else
                             <div class="flex h-full items-center justify-center bg-gradient-to-br from-sky-200 to-amber-100 text-xl font-bold text-slate-700">{{ $item->title }}</div>
                         @endif

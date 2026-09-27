@@ -30,7 +30,7 @@ class TeacherController extends Controller
     {
         $this->authorizeRole(['admin', 'teacher']);
 
-        return view('teachers.form', ['teacher' => new Teacher(), 'mode' => 'create']);
+        return view('teachers.form', ['teacher' => new Teacher, 'mode' => 'create']);
     }
 
     public function store(Request $request): RedirectResponse
@@ -44,7 +44,7 @@ class TeacherController extends Controller
             'email' => ['nullable', 'email', 'max:255'],
             'phone' => ['nullable', 'string', 'max:30'],
             'bio' => ['nullable', 'string'],
-            'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
+            'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
         $teacher = Teacher::create([
@@ -83,7 +83,7 @@ class TeacherController extends Controller
             'email' => ['nullable', 'email', 'max:255'],
             'phone' => ['nullable', 'string', 'max:30'],
             'bio' => ['nullable', 'string'],
-            'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
+            'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
         $teacher->update([

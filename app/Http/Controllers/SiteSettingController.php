@@ -40,9 +40,9 @@ class SiteSettingController extends Controller
             'principal_message' => ['required', 'string'],
             'about_title' => ['required', 'string', 'max:255'],
             'about_description' => ['required', 'string'],
-            'hero_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
-            'principal_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
-            'school_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
+            'hero_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'principal_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'school_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
         if (! Schema::hasTable('site_settings')) {

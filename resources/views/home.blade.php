@@ -211,7 +211,7 @@
                 <div class="z-10 w-full lg:w-auto flex justify-center">
                     <div class="liquid-card p-4 rounded-3xl shadow-xl bg-white/40 max-w-sm w-full border border-white">
                         <div class="rounded-2xl overflow-hidden shadow-inner relative group h-64 bg-sky-100 flex items-center justify-center">
-                            <img src="{{ $site->hero_image_path ? asset('storage/'.$site->hero_image_path) : 'https://placehold.co/500x400/38bdf8/ffffff?text=Anak+Belajar+Ceria' }}" alt="{{ $site->site_name ?? 'Sekolah' }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/500x400/38bdf8/ffffff?text=SD+Ceria'">
+                            <img src="{{ $site->hero_image_path ? Storage::disk('public')->url($site->hero_image_path) : 'https://placehold.co/500x400/38bdf8/ffffff?text=Anak+Belajar+Ceria' }}" alt="{{ $site->site_name ?? 'Sekolah' }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/500x400/38bdf8/ffffff?text=SD+Ceria'">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent flex items-end p-4">
                                 <div class="text-white">
                                     <p class="text-xs uppercase font-semibold tracking-wider text-amber-300">Kegiatan Siswa</p>
@@ -242,7 +242,7 @@
                     <div class="relative">
                         <div class="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-sky-400 to-amber-400 opacity-70 blur-lg"></div>
                         <div class="relative w-56 h-64 rounded-3xl overflow-hidden border-4 border-white shadow-xl bg-slate-200">
-                            <img src="{{ $site->principal_image_path ? asset('storage/'.$site->principal_image_path) : 'https://placehold.co/300x350/cbd5e1/475569?text=Kepala+Sekolah' }}" alt="{{ $site->principal_name ?? 'Kepala Sekolah' }}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/300x350/cbd5e1/475569?text=Kepala+Sekolah'">
+                            <img src="{{ $site->principal_image_path ? Storage::disk('public')->url($site->principal_image_path) : 'https://placehold.co/300x350/cbd5e1/475569?text=Kepala+Sekolah' }}" alt="{{ $site->principal_name ?? 'Kepala Sekolah' }}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/300x350/cbd5e1/475569?text=Kepala+Sekolah'">
                         </div>
                     </div>
                 </div>

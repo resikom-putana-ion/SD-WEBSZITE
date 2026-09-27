@@ -6,7 +6,9 @@ use App\Models\Payment;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class FinanceController extends Controller
 {
@@ -36,7 +38,7 @@ class FinanceController extends Controller
             'amount' => ['required', 'integer', 'min:1000'],
             'month' => ['required', 'string', 'max:50'],
             'notes' => ['nullable', 'string', 'max:255'],
-            'proof' => ['required', 'image', 'mimes:jpg,jpeg,png,webp'],
+            'proof' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
         Payment::create([
@@ -44,7 +46,7 @@ class FinanceController extends Controller
             'amount' => $validated['amount'],
             'month' => $validated['month'],
             'notes' => $validated['notes'] ?? null,
-            'proof_path' => $request->file('proof')->store('payments', 'public'),
+            'proof_path' => $request->file('proof')->store('payments', 'proofs'),
             'status' => 'pending',
         ]);
 
@@ -62,6 +64,13 @@ class FinanceController extends Controller
         ]);
 
         return back()->with('success', 'Pembayaran berhasil disetujui.');
+    }
+
+    public function proof(Payment $payment): StreamedResponse
+    {
+        $this->authorizeRole(['finance', 'admin']);
+
+        return Storage::disk('proofs')->download($payment->proof_path);
     }
 
     public function reject(Payment $payment): RedirectResponse

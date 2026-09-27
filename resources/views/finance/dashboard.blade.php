@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="flex gap-2">
-                            <a href="{{ asset('storage/'.$payment->proof_path) }}" target="_blank" class="rounded-full bg-sky-600 px-4 py-2 text-sm font-bold text-white">Lihat Bukti</a>
+                            <a href="{{ route('finance.payments.proof', $payment) }}" target="_blank" class="rounded-full bg-sky-600 px-4 py-2 text-sm font-bold text-white">Lihat Bukti</a>
                             @if ($payment->status !== 'approved')
                                 <form action="{{ route('finance.payments.approve', $payment) }}" method="POST">
                                     @csrf

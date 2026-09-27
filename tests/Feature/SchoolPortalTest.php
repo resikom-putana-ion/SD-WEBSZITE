@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Gallery;
+use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -17,6 +19,21 @@ class SchoolPortalTest extends TestCase
         $response = $this->get('/login');
 
         $response->assertStatus(200);
+    }
+
+    public function test_login_is_throttled_after_five_failed_attempts(): void
+    {
+        for ($attempt = 0; $attempt < 5; $attempt++) {
+            $this->post('/login', [
+                'email' => 'unknown@example.com',
+                'password' => 'wrong-password',
+            ])->assertRedirect();
+        }
+
+        $this->post('/login', [
+            'email' => 'unknown@example.com',
+            'password' => 'wrong-password',
+        ])->assertStatus(429);
     }
 
     public function test_public_registration_store_creates_registration_record(): void
@@ -37,7 +54,7 @@ class SchoolPortalTest extends TestCase
 
     public function test_student_can_submit_payment_confirmation_and_teacher_dashboard_is_accessible(): void
     {
-        Storage::fake('public');
+        Storage::fake('proofs');
 
         $student = User::factory()->create([
             'name' => 'Student Payment',
@@ -61,6 +78,14 @@ class SchoolPortalTest extends TestCase
             'status' => 'pending',
         ]);
 
+        $payment = Payment::firstOrFail();
+        Storage::disk('proofs')->assertExists($payment->proof_path);
+        $this->get(route('finance.payments.proof', $payment))->assertForbidden();
+
+        $finance = User::factory()->create(['role' => 'finance']);
+        $this->actingAs($finance);
+        $this->get(route('finance.payments.proof', $payment))->assertOk()->assertDownload();
+
         $teacher = User::factory()->create([
             'name' => 'Guru Baru',
             'email' => 'guru@example.com',
@@ -69,5 +94,21 @@ class SchoolPortalTest extends TestCase
 
         $this->actingAs($teacher);
         $this->get('/dashboard/teacher')->assertStatus(200);
+    }
+
+    public function test_admin_can_upload_gallery_image(): void
+    {
+        Storage::fake('public');
+
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $this->actingAs($admin)->post('/admin/galeri', [
+            'title' => 'Foto kegiatan',
+            'category' => 'Kegiatan',
+            'image' => UploadedFile::fake()->image('kegiatan.png', 100, 100),
+        ])->assertRedirect('/admin/galeri');
+
+        $gallery = Gallery::where('title', 'Foto kegiatan')->firstOrFail();
+        Storage::disk('public')->assertExists($gallery->image_path);
     }
 }

@@ -29,7 +29,7 @@
                     <div class="flex items-center gap-4">
                         <div class="h-20 w-20 overflow-hidden rounded-2xl bg-slate-200">
                             @if ($item->image_path)
-                                <img src="{{ asset('storage/'.$item->image_path) }}" alt="{{ $item->title }}" class="h-full w-full object-cover">
+                                <img src="{{ Storage::disk('public')->url($item->image_path) }}" alt="{{ $item->title }}" class="h-full w-full object-cover">
                             @endif
                         </div>
                         <div>

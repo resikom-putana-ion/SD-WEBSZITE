@@ -38,7 +38,7 @@ class NewsController extends Controller
     {
         $this->authorizeRole(['admin', 'teacher']);
 
-        return view('news.form', ['news' => new News(), 'mode' => 'create']);
+        return view('news.form', ['news' => new News, 'mode' => 'create']);
     }
 
     public function store(Request $request): RedirectResponse
@@ -49,7 +49,7 @@ class NewsController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'excerpt' => ['nullable', 'string', 'max:255'],
             'content' => ['required', 'string'],
-            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'published_at' => ['nullable', 'date'],
         ]);
 
@@ -86,7 +86,7 @@ class NewsController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'excerpt' => ['nullable', 'string', 'max:255'],
             'content' => ['required', 'string'],
-            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'published_at' => ['nullable', 'date'],
         ]);
 

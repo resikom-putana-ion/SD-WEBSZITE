@@ -18,7 +18,7 @@
                 <div class="overflow-hidden rounded-[30px] border border-white/80 bg-white/70 p-5 text-center shadow-lg backdrop-blur">
                     <div class="mx-auto mb-4 h-28 w-28 overflow-hidden rounded-full border-4 border-sky-100 bg-slate-200">
                         @if ($teacher->photo_path)
-                            <img src="{{ asset('storage/'.$teacher->photo_path) }}" alt="{{ $teacher->name }}" class="h-full w-full object-cover">
+                            <img src="{{ Storage::disk('public')->url($teacher->photo_path) }}" alt="{{ $teacher->name }}" class="h-full w-full object-cover">
                         @else
                             <div class="flex h-full items-center justify-center bg-gradient-to-br from-sky-200 to-amber-100 text-lg font-bold text-slate-700">{{ strtoupper(substr($teacher->name, 0, 1)) }}</div>
                         @endif

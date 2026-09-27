@@ -87,7 +87,7 @@
                                 <label class="mb-2 block text-sm font-semibold text-slate-700">Foto Hero</label>
                                 <input type="file" name="hero_image" accept="image/*" class="w-full rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-4 py-3">
                                 @if($setting->hero_image_path)
-                                    <img src="{{ asset('storage/'.$setting->hero_image_path) }}" class="mt-4 h-48 w-full rounded-2xl object-cover">
+                                    <img src="{{ Storage::disk('public')->url($setting->hero_image_path) }}" class="mt-4 h-48 w-full rounded-2xl object-cover">
                                 @endif
                             </div>
                         </div>
@@ -116,7 +116,7 @@
                                 <label class="mb-2 block text-sm font-semibold text-slate-700">Foto Kepala Sekolah</label>
                                 <input type="file" name="principal_image" accept="image/*" class="w-full rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-4 py-3">
                                 @if($setting->principal_image_path)
-                                    <img src="{{ asset('storage/'.$setting->principal_image_path) }}" class="mt-4 h-48 w-full rounded-2xl object-cover">
+                                    <img src="{{ Storage::disk('public')->url($setting->principal_image_path) }}" class="mt-4 h-48 w-full rounded-2xl object-cover">
                                 @endif
                             </div>
                         </div>
@@ -133,7 +133,7 @@
                             <label class="mb-2 block text-sm font-semibold text-slate-700">Gambar Profil Sekolah</label>
                             <input type="file" name="school_image" accept="image/*" class="w-full rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-4 py-3">
                             @if($setting->school_image_path)
-                                <img src="{{ asset('storage/'.$setting->school_image_path) }}" class="mt-4 h-56 w-full rounded-2xl object-cover">
+                                <img src="{{ Storage::disk('public')->url($setting->school_image_path) }}" class="mt-4 h-56 w-full rounded-2xl object-cover">
                             @endif
                         </div>
                     </section>

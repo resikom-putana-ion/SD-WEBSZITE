@@ -17,7 +17,7 @@
             @forelse ($galleries as $gallery)
                 <article class="overflow-hidden rounded-[30px] border border-white/80 bg-white/70 shadow-lg backdrop-blur">
                     <div class="h-64 overflow-hidden">
-                        <img src="{{ asset('storage/'.$gallery->image_path) }}" alt="{{ $gallery->title }}" class="h-full w-full object-cover">
+                        <img src="{{ Storage::disk('public')->url($gallery->image_path) }}" alt="{{ $gallery->title }}" class="h-full w-full object-cover">
                     </div>
                     <div class="space-y-4 p-5">
                         <div class="flex items-center justify-between">

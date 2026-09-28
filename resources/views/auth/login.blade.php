@@ -88,11 +88,13 @@
                 <div class="mt-8 rounded-2xl border border-sky-100 bg-sky-50 p-4 text-sm text-slate-700">
                     <p class="font-semibold mb-2">Akun demo:</p>
                     <ul class="space-y-1 text-xs text-slate-600">
-                        <li>Admin: admin@sdcerianusantara.sch.id / password</li>
-                        <li>Akademik: akademik@sdcerianusantara.sch.id / password</li>
-                        <li>Keuangan: keuangan@sdcerianusantara.sch.id / password</li>
-                        <li>Mahasiswa: mahasiswa@sdcerianusantara.sch.id / password</li>
+                        <li>Admin: admin@sdcerianusantara.sch.id</li>
+                        <li>Akademik: akademik@sdcerianusantara.sch.id</li>
+                        <li>Guru: guru@sdcerianusantara.sch.id</li>
+                        <li>Keuangan: keuangan@sdcerianusantara.sch.id</li>
+                        <li>Siswa: mahasiswa@sdcerianusantara.sch.id</li>
                     </ul>
+                    <p class="mt-3 text-xs text-slate-600">Minta kata sandi demo kepada pengelola proyek.</p>
                 </div>
 
                 <p class="mt-8 text-center text-sm text-slate-500">
